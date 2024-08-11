@@ -55,7 +55,7 @@ const userSchema = new Schema(
 // jb bhi pre ke andar call back likhte hain please arrow function mt use kro kyunki arrow function ko this ka reference nhi pta hota (context nhi pta hota). mtlb ye hai ki arrow function ko ye ni pta hoga ki vo userSchema ke liye kaam kr rha hai.
 userSchema.pre("save", async function (next) {
     if (!this.isModified("password")) return next();
-    this.password = bcrypt.hash(this.password, 10);
+    this.password = await bcrypt.hash(this.password, 10);
     next();
 });
 
